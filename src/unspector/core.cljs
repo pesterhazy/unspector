@@ -10,13 +10,12 @@
 
 (defonce app-state (atom {:text "Hello world!"}))
 
-(defn datetime []
-  [:> (gobj/get js/window "ReactDatetime") {:input false}])
+(defn inspector [& args]
+  (into [:> (gobj/get (gobj/get js/window "ReactInspector") "Inspector")] args))
 
 (defn hello-world []
-  [:div
-   [:h1 (:text @app-state)]
-   [datetime]])
+  [inspector {:expand-level 3
+              :data #js {:foo "bar"}}])
 
 (reagent/render-component [hello-world]
                           (. js/document (getElementById "app")))
