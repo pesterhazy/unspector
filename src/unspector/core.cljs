@@ -18,12 +18,12 @@
 (defn inspector [& args]
   (into [:> (gobj/get (gobj/get js/window "ReactInspector") "Inspector")] args))
 
-(defn hello-world []
+(defn root-ui []
   [inspector {:expand-level 3
               :data (->> (get-query-params)
                          clj->js)}])
 
-(reagent/render-component [hello-world]
+(reagent/render-component [root-ui]
                           (. js/document (getElementById "app")))
 
 (defn on-js-reload []

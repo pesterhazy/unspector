@@ -44,12 +44,9 @@
                            ;; To console.log CLJS data-structures make sure you enable devtools in Chrome
                            ;; https://github.com/binaryage/cljs-devtools
                            :preloads [devtools.preload]}}
-               ;; This next build is an compressed minified build for
-               ;; production. You can build this with:
-               ;; lein cljsbuild once min
-               {:id "min"
+               {:id "prod"
                 :source-paths ["src"]
-                :compiler {:output-to "resources/public/js/compiled/unspector.js"
+                :compiler {:output-to "build/js/compiled/unspector.js"
                            :main unspector.core
                            :optimizations :advanced
                            :pretty-print false}}]}
