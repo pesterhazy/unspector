@@ -15,12 +15,19 @@
 (defn get-query-params []
   (-> (guri/parse js/location) .getQueryData extract transform))
 
+(defn get-hash-json []
+  (when-let [[_ dat] (re-matches #"^#json:(.*)" js/location.hash)]
+    (-> dat js/decodeURIComponent js/JSON.parse)))
+
+(defn get-data []
+  (or (get-hash-json) (get-query-params)))
+
 (defn inspector [& args]
   (into [:> (gobj/get (gobj/get js/window "ReactInspector") "Inspector")] args))
 
 (defn root-ui []
   [inspector {:expand-level 3
-              :data (->> (get-query-params)
+              :data (->> (get-data)
                          clj->js)}])
 
 (reagent/render-component [root-ui]
