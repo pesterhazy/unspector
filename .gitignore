@@ -13,3 +13,4 @@ pom.xml
 .nrepl-port
 node_modules
 /resources/public/js/npm-bundle.js
+/build/
