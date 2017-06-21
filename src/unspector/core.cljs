@@ -1,10 +1,10 @@
-(ns double-bundle.core
+(ns unspector.core
   (:require [reagent.core :as reagent :refer [atom]]
             [goog.object :as gobj]))
 
 (enable-console-print!)
 
-(println "This text is printed from src/double-bundle/core.cljs. Go ahead and edit it and see reloading in action.")
+(println "This text is printed from src/unspector/core.cljs. Go ahead and edit it and see reloading in action.")
 
 ;; define your app data so that it doesn't get over-written on reload
 
