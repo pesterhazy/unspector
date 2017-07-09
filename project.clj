@@ -10,6 +10,7 @@
                  [org.clojure/clojurescript "1.9.229"]
                  [org.clojure/core.async  "0.3.442"
                   :exclusions [org.clojure/tools.reader]]
+                 [com.cognitect/transit-cljs "0.8.239"]
                  [cljsjs/react-surrogate "15.5.4-0"]
                  [cljsjs/react-dom-surrogate "15.5.4-0"]
                  [cljsjs/react-dom-server-surrogate "15.5.4-0"]

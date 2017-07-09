@@ -1,10 +1,28 @@
 (ns unspector.core
   (:require [reagent.core :as reagent :refer [atom]]
+            [cognitect.transit :as transit]
             [clojure.string :as str]
+            [goog.net.XhrIo :as xhr]
             [goog.Uri :as guri]
             [goog.object :as gobj]))
 
 (enable-console-print!)
+
+(def transit-reader (transit/reader :json))
+(def transit-writer (transit/writer :json))
+
+(defn send [m cb]
+  (xhr/send "http://localhost:9999/action"
+            (fn [e]
+              (if (-> e .-target .isSuccess)
+                (->> e
+                     .-target
+                     .getResponseText
+                     (transit/read transit-reader)
+                     cb)
+                (prn [:network-request-failed])))
+            "POST"
+            (transit/write transit-writer m)))
 
 (defn extract [qd] (map (fn [k] [k (.get qd k)]) (.getKeys qd)))
 (defn transform [kvs]
@@ -34,4 +52,4 @@
                           (. js/document (getElementById "app")))
 
 (defn on-js-reload []
-  )
+  (send [1 2 3 4 5] prn))
